@@ -9,32 +9,34 @@ class PeopleData extends RESTDataSource {
   async getAllPeople() {
     const response = await this.get("people");
     return Array.isArray(response.results)
-      ? response.results.map((person) => this.personReducer(person))
+      ? new Array(response)
       : [];
   }
 
-  async getPeopleByPage({ pageNumber }) {
-    const response = await this.get("people/", { page: pageNumber });
+  async getPeopleByName({search }) {
+
+    const response = await this.get("people/", { search: search });
+    
     return Array.isArray(response.results)
-      ? response.results.map((person) => this.personReducer(person))
+      ? new Array(response)
       : [];
   }
 
-  async getPeopleByName({ str }) {
-    const response = await this.get("people/", { search: str });
+  async getPeopleByPage({ page }) {
+    const response = await this.get("people/", { page: page });
     return Array.isArray(response.results)
-      ? response.results.map((person) => this.personReducer(person))
+      ? new Array(response)
       : [];
   }
 
-  personObject(person) {
-    return {
-      name: person.name,
-      height: person.height,
-      mass: person.mass,
-      gender: person.gender,
-      homeworld: person.homeworld,
-    };
+
+  personObject(result) {
+      return {
+        count: result.count , 
+        next: result.next, 
+        previous: result.previous, 
+        results: result.results
+      }
   }
 }
 

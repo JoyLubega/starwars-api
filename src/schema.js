@@ -8,10 +8,16 @@ const typeDefs = gql`
     gender: String
     homeworld: String
   }
+  type Response{
+    count: Int
+    next: String
+    previous:String
+    results:[Person]
+     }
   type Query {
-    allPeople: [Person]!
-    people(page: Int): [Person]!
-    person(name: String): [Person]!
+    allPeople: [Response]!
+    people(page: Int): [Response]!
+    person(name: String): [Response]!
   }
 `;
 

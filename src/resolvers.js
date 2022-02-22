@@ -3,8 +3,8 @@ module.exports = {
       allPeople: (_, __, { dataSources }) =>
         dataSources.starWarsAPI.getAllPeople(),
       people: (_, { page }, { dataSources }) =>
-        dataSources.starWarsAPI.getPeopleByPage({ pageNum: page }),
+        dataSources.starWarsAPI.getPeopleByPage({ page: page }),
       person: (_, { name }, { dataSources }) =>
-        dataSources.starWarsAPI.getPeopleByName({ nameSearch: name }),
+        dataSources.starWarsAPI.getPeopleByName({ search: name }),
     },
   };
